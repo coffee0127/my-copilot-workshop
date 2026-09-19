@@ -239,10 +239,31 @@ button:focus-visible {
 
 .todo-footer {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: 18px;
   color: var(--color-muted);
   font-weight: 700;
+}
+
+.clear-button {
+  min-height: 36px;
+  padding: 0 12px;
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
+  font-size: 0.9rem;
+}
+
+.clear-button:hover:not(:disabled),
+.clear-button:focus-visible:not(:disabled) {
+  color: var(--color-button-text);
+  background: var(--color-danger);
+}
+
+.clear-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .visually-hidden {
