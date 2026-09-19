@@ -1,16 +1,43 @@
 :root {
   --color-page: #f3f0e8;
+  --color-page-start: #f7f2e8;
+  --color-page-end: #e7efe8;
   --color-card: #fffdf8;
+  --color-card-border: rgba(222, 216, 203, 0.75);
+  --color-control: #f8f5ee;
   --color-text: #1f2933;
   --color-muted: #6b7280;
   --color-border: #ded8cb;
   --color-primary: #2f6f73;
   --color-primary-dark: #26575a;
+  --color-button-text: #ffffff;
   --color-danger: #b84a40;
   --color-danger-soft: #f8e4e1;
+  --color-focus: rgba(47, 111, 115, 0.22);
+  --color-page-glow: rgba(47, 111, 115, 0.18);
   --color-shadow: rgba(31, 41, 51, 0.14);
   --radius-card: 20px;
   --radius-control: 12px;
+}
+
+[data-theme="dark"] {
+  --color-page: #111827;
+  --color-page-start: #17202f;
+  --color-page-end: #0b3b3f;
+  --color-card: #18212f;
+  --color-card-border: rgba(148, 163, 184, 0.24);
+  --color-control: #101827;
+  --color-text: #f8fafc;
+  --color-muted: #a8b3c2;
+  --color-border: #2d3a4d;
+  --color-primary: #7dd3d8;
+  --color-primary-dark: #5fbcc1;
+  --color-button-text: #0f172a;
+  --color-danger: #fca5a5;
+  --color-danger-soft: #3f1f26;
+  --color-focus: rgba(125, 211, 216, 0.28);
+  --color-page-glow: rgba(125, 211, 216, 0.18);
+  --color-shadow: rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -26,20 +53,29 @@ body {
   color: var(--color-text);
   font-family: Georgia, "Times New Roman", serif;
   background:
-    radial-gradient(circle at 15% 10%, rgba(47, 111, 115, 0.18), transparent 28%),
-    linear-gradient(135deg, #f7f2e8 0%, var(--color-page) 48%, #e7efe8 100%);
+    radial-gradient(circle at 15% 10%, var(--color-page-glow), transparent 28%),
+    linear-gradient(
+      135deg,
+      var(--color-page-start) 0%,
+      var(--color-page) 48%,
+      var(--color-page-end) 100%
+    );
 }
 
 .todo-card {
   width: min(100%, 520px);
   padding: 32px;
   background: var(--color-card);
-  border: 1px solid rgba(222, 216, 203, 0.75);
+  border: 1px solid var(--color-card-border);
   border-radius: var(--radius-card);
   box-shadow: 0 18px 45px var(--color-shadow);
 }
 
 .todo-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
   margin-bottom: 24px;
 }
 
@@ -77,19 +113,19 @@ input {
   width: 100%;
   padding: 0 14px;
   color: var(--color-text);
-  background: #f8f5ee;
+  background: var(--color-control);
   border: 1px solid var(--color-border);
 }
 
 input:focus {
-  outline: 3px solid rgba(47, 111, 115, 0.22);
+  outline: 3px solid var(--color-focus);
   border-color: var(--color-primary);
 }
 
 button {
   cursor: pointer;
   padding: 0 18px;
-  color: #ffffff;
+  color: var(--color-button-text);
   background: var(--color-primary);
   font-weight: 700;
 }
@@ -99,12 +135,50 @@ button:focus-visible {
   background: var(--color-primary-dark);
 }
 
+.theme-toggle {
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 0 12px;
+  color: var(--color-primary);
+  background: var(--color-control);
+  border: 1px solid var(--color-border);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  color: var(--color-button-text);
+  background: var(--color-primary);
+}
+
+.filter-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  min-height: 40px;
+  padding: 0 10px;
+  color: var(--color-primary);
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.filter-button:hover,
+.filter-button:focus-visible,
+.filter-button.is-active {
+  color: var(--color-button-text);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
 .empty-message {
   margin: 22px 0;
   padding: 20px;
   color: var(--color-muted);
   text-align: center;
-  background: #f8f5ee;
+  background: var(--color-control);
   border: 1px dashed var(--color-border);
   border-radius: var(--radius-control);
 }
@@ -159,7 +233,7 @@ button:focus-visible {
 
 .delete-button:hover,
 .delete-button:focus-visible {
-  color: #ffffff;
+  color: var(--color-button-text);
   background: var(--color-danger);
 }
 
@@ -196,7 +270,16 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  button {
+  .todo-form button {
+    width: 100%;
+  }
+
+  .todo-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .theme-toggle {
     width: 100%;
   }
 }

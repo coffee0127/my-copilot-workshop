@@ -10,8 +10,11 @@
 <body>
   <main class="todo-card" aria-labelledby="app-title">
     <header class="todo-header">
-      <p class="eyebrow">Today</p>
-      <h1 id="app-title">待辦清單</h1>
+      <div>
+        <p class="eyebrow">Today</p>
+        <h1 id="app-title">待辦清單</h1>
+      </div>
+      <button class="theme-toggle" id="theme-toggle" type="button"></button>
     </header>
 
     <form class="todo-form" id="todo-form">
@@ -25,6 +28,12 @@
       >
       <button type="submit">新增</button>
     </form>
+
+    <div class="filter-controls" aria-label="篩選待辦事項">
+      <button class="filter-button is-active" type="button" data-filter="all">全部</button>
+      <button class="filter-button" type="button" data-filter="active">未完成</button>
+      <button class="filter-button" type="button" data-filter="completed">已完成</button>
+    </div>
 
     <p class="empty-message" id="empty-message">還沒有任何待辦事項,新增一個吧!</p>
     <ul class="todo-list" id="todo-list" aria-label="待辦事項清單"></ul>
